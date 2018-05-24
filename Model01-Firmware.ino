@@ -121,9 +121,9 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
 
   [LEFT_FN] = KEYMAP_STACKED(
     ___, ___, ___, ___, ___, ___, ___,
-    ___, Consumer_ScanPreviousTrack, Consumer_PlaySlashPause, Consumer_ScanNextTrack, ___, ___, ___,
+    ___, Consumer_ScanPreviousTrack, Consumer_PlaySlashPause, Consumer_ScanNextTrack, ___, ___, Key_PageUp,
     ___, Consumer_VolumeDecrement, Consumer_VolumeIncrement, Consumer_Mute, ___, ___,
-    ___, Key_F14, Key_F15, ___, ___, ___, ___,
+    ___, Key_F14, Key_F15, ___, ___, ___, Key_PageDown,
 
     ___, Key_Delete, ___, ___,
     ___,
