@@ -225,13 +225,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // We start with the LED effect that turns off all the LEDs.
   LEDOff,
 
-  // The rainbow effect changes the color of all of the keyboard's keys at
-  // the same time running through all the colors of the rainbow.
+  // Some LED effects.
   LEDRainbowEffect,
-
-  // The rainbow wave effect lights up your keyboard with all the colors of a
-  // rainbow and slowly moves the rainbow across your keyboard.
   LEDRainbowWaveEffect,
+  StalkerEffect,
 
   // These static effects turn your keyboard's LEDs a variety of colors.
   solidWhite, // &solidRed, &solidOrange, &solidYellow, &solidGreen,
@@ -265,12 +262,13 @@ void setup() {
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255).
   // This draws more than 500mA, but looks much nicer than a dimmer effect.
   LEDRainbowEffect.brightness(150);
+  LEDRainbowEffect.update_delay(100);
   LEDRainbowWaveEffect.brightness(150);
 
   // The LED Stalker mode has a few effects. The one we like is called
   // 'BlazingTrail'. For details on other options, see
   // https://github.com/keyboardio/Kaleidoscope-LED-Stalker
-  StalkerEffect.variant = STALKER(BlazingTrail);
+  StalkerEffect.variant = STALKER(Haunt, (CRGB(160, 160, 160)));
 
   // We want the keyboard to be able to wake the host up from suspend.
   HostPowerManagement.enableWakeup();
