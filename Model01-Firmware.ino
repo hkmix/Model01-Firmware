@@ -254,10 +254,11 @@ void setup() {
   Kaleidoscope.setup();
 
   // Mouse keys options.
-  MouseKeys.speed = 25;
-  MouseKeys.speedDelay = 1;
-  MouseKeys.accelSpeed = 0;
-  MouseKeys.accelDelay = 1;
+  MouseKeys.speed = 4;
+  MouseKeys.speedDelay = 4;
+  MouseKeys.accelSpeed = 1;
+  MouseKeys.accelDelay = 12;
+  MouseKeys.speedLimit = 64;
 
   // We set the brightness of the rainbow effects to 150 (on a scale of 0-255).
   // This draws more than 500mA, but looks much nicer than a dimmer effect.
