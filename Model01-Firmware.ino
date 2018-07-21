@@ -129,9 +129,9 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
     ___,
 
     M(MACRO_VERSION_INFO),  Key_KeypadNumLock, Key_Keypad7, Key_KeypadDivide, Key_KeypadMultiply, Key_KeypadSubtract, ___,
-    ___,                    Key_PrintScreen,   Key_Keypad7, Key_Keypad8, Key_Keypad9, Key_KeypadAdd, ___,
+    Key_Home,               Key_PrintScreen,   Key_Keypad7, Key_Keypad8, Key_Keypad9, Key_KeypadAdd, ___,
                             Key_ScrollLock,    Key_Keypad4, Key_Keypad5, Key_Keypad6, Key_KeypadAdd, ___,
-    ___,                    Key_Pause,         Key_Keypad1, Key_Keypad2, Key_Keypad3, Key_Equals,    ___,
+    Key_End,                Key_Pause,         Key_Keypad1, Key_Keypad2, Key_Keypad3, Key_Equals,    ___,
 
     Key_Enter, Key_Enter, Key_Keypad0, Key_Keypad0,
     ___
