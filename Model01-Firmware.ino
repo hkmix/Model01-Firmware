@@ -243,6 +243,9 @@ setup()
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
 
+  // Increase debounce.
+  KeyboardHardware.setKeyscanInterval(8);
+
   // Mouse keys options.
   MouseKeys.speed = 4;
   MouseKeys.speedDelay = 4;
