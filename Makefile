@@ -12,7 +12,7 @@ PACKAGE_DIR ?= $(HOME)/.arduino15
 endif
 
 
-ARDUINO_INSTALLED_ENV=$(shell ls -dt $(PACKAGE_DIR)/packages/keyboardio/hardware/avr/* 2>/dev/null |head -n 1)
+ARDUINO_INSTALLED_ENV=$(shell ls -dt $(PACKAGE_DIR)/packages/keyboardio/hardware/avr 2>/dev/null |head -n 1)
 MANUALLY_INSTALLED_ENV=$(shell ls -dt $(SKETCHBOOK_DIR)/hardware/keyboardio/avr 2>/dev/null |head -n 1)
 
 
@@ -50,6 +50,6 @@ endif
 
 
 BOARD_HARDWARE_PATH ?= $(SKETCHBOOK_DIR)/hardware
-KALEIDOSCOPE_PLUGIN_MAKEFILE_DIR ?= keyboardio/avr/build-tools/makefiles/
+KALEIDOSCOPE_PLUGIN_MAKEFILE_DIR ?= keyboardio/build-tools/makefiles/
 
 include $(BOARD_HARDWARE_PATH)/$(KALEIDOSCOPE_PLUGIN_MAKEFILE_DIR)/rules.mk
