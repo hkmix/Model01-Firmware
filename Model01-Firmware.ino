@@ -28,7 +28,8 @@
 // Macros.
 enum {
   MACRO_VERSION_INFO,
-  MACRO_ANY,
+  MACRO_LBRACE,
+  MACRO_RBRACE,
 };
 
 // Layers.
@@ -48,7 +49,7 @@ KEYMAPS(
     Key_LeftGui, Key_Backspace, Key_Escape, Key_Backtick,
     ShiftToLayer(LEFT_FN),
 
-    M(MACRO_ANY),     Key_6, Key_7, Key_8,     Key_9,       Key_0,         Key_Minus,
+    ___,              Key_6, Key_7, Key_8,     Key_9,       Key_0,         Key_Minus,
     Key_RightBracket, Key_Y, Key_U, Key_I,     Key_O,       Key_P,         Key_Backslash,
                       Key_H, Key_J, Key_K,     Key_L,       Key_Semicolon, Key_Quote,
     Key_RightAlt,     Key_N, Key_M, Key_Comma, Key_Period,  Key_Slash,     Key_RightShift,
@@ -66,10 +67,10 @@ KEYMAPS(
     ___, Key_Delete, ___, ___,
     ___,
 
-    M(MACRO_VERSION_INFO),  Key_KeypadNumLock, Key_Keypad7, Key_KeypadDivide, Key_KeypadMultiply, Key_KeypadSubtract, ___,
-    Key_Home,               Key_PrintScreen,   Key_Keypad7, Key_Keypad8, Key_Keypad9, Key_KeypadAdd, ___,
-                            Key_ScrollLock,    Key_Keypad4, Key_Keypad5, Key_Keypad6, Key_KeypadAdd, ___,
-    Key_End,                Key_Pause,         Key_Keypad1, Key_Keypad2, Key_Keypad3, Key_Equals,    ___,
+    M(MACRO_VERSION_INFO), Key_KeypadNumLock, Key_Keypad7, Key_KeypadDivide, Key_KeypadMultiply, Key_KeypadSubtract, ___,
+    Key_Home,              Key_PrintScreen,   Key_Keypad7, Key_Keypad8, Key_Keypad9, Key_KeypadAdd, ___,
+                           Key_ScrollLock,    Key_Keypad4, Key_Keypad5, Key_Keypad6, Key_KeypadAdd, ___,
+    Key_End,               Key_Pause,         Key_Keypad1, Key_Keypad2, Key_Keypad3, Key_Equals,    ___,
 
     Key_Enter, Key_Enter, Key_Keypad0, Key_Keypad0,
     ___
@@ -84,10 +85,10 @@ KEYMAPS(
     Key_mouseBtnM, Key_mouseBtnL, Key_mouseBtnR, ___,
     ___,
 
-    ___, Key_F6,        Key_F7,               Key_F8,                Key_F9,          Key_F10,          Key_F11,
-    ___, ___,           Key_LeftCurlyBracket, Key_RightCurlyBracket, Key_LeftBracket, Key_RightBracket, Key_F12,
-         Key_LeftArrow, Key_DownArrow,        Key_UpArrow,           Key_RightArrow,  ___,              ___,
-    ___, ___,           ___,                  ___,                   ___,             ___,              ___,
+    ___, Key_F6,        Key_F7,          Key_F8,          Key_F9,          Key_F10,          Key_F11,
+    ___, ___,           M(MACRO_LBRACE), M(MACRO_RBRACE), Key_LeftBracket, Key_RightBracket, Key_F12,
+         Key_LeftArrow, Key_DownArrow,   Key_UpArrow,     Key_RightArrow,  ___,              ___,
+    ___, ___,           ___,             ___,             ___,             ___,              ___,
 
     ___, ___, Key_Enter, ___,
     ___
@@ -99,7 +100,6 @@ versionInfoMacro(uint8_t keyState)
 {
   if (keyToggledOn(keyState)) {
     Macros.type(PSTR("Property of @hkmix"));
-    Macros.type(PSTR(BUILD_INFORMATION));
   }
 }
 
@@ -109,6 +109,14 @@ macro_t *macroAction(uint8_t macroIndex, uint8_t keyState)
   switch (macroIndex) {
   case MACRO_VERSION_INFO:
     versionInfoMacro(keyState);
+    break;
+
+  case MACRO_LBRACE:
+    return MACRODOWN(D(LeftShift), W(10), D(LeftBracket), U(LeftBracket), U(LeftShift));
+    break;
+
+  case MACRO_RBRACE:
+    return MACRODOWN(D(LeftShift), W(10), D(RightBracket), U(RightBracket), U(LeftShift));
     break;
   }
 
@@ -138,10 +146,12 @@ toggleLedsOnSuspendResume(
     LEDControl.syncLeds();
     LEDControl.paused = true;
     break;
+
   case kaleidoscope::plugin::HostPowerManagement::Resume:
     LEDControl.paused = false;
     LEDControl.refreshAll();
     break;
+
   case kaleidoscope::plugin::HostPowerManagement::Sleep:
     break;
   }
@@ -244,14 +254,14 @@ setup()
   Kaleidoscope.setup();
 
   // Increase debounce.
-  KeyboardHardware.setKeyscanInterval(8);
+  KeyboardHardware.setKeyscanInterval(10);
 
   // Mouse keys options.
   MouseKeys.speed = 4;
-  MouseKeys.speedDelay = 4;
+  MouseKeys.speedDelay = 2;
   MouseKeys.accelSpeed = 1;
-  MouseKeys.accelDelay = 12;
-  MouseKeys.setSpeedLimit(64);
+  MouseKeys.accelDelay = 8;
+  MouseKeys.setSpeedLimit(96);
 
   // We configure the AlphaSquare effect to use RED letters.
   AlphaSquare.color = CRGB(255, 0, 0);
